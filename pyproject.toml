@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "path_cfg_manager"
-version = "0.0.1"
+version = "0.0.3"
 description = "Auto-detect project root and provide convenient path accessors for data, models, conf, and logs directories"
 readme = "README.md"
 requires-python = ">=3.12"

@@ -21,14 +21,12 @@ def _set_sub_paths(project_path: str) -> None:
 
 
 def __init_path() -> None:
-    project_path = os.getenv('PROJECTPATH')
-    if project_path is None:
-        file_path = os.path.realpath(sys.argv[0])
-        index = file_path.find(f'{os.sep}src{os.sep}')
-        if index == -1:
-            print('PROJECTPATH env var not set and /src/ directory not found in path. Path initialization failed.')
-            return
-        project_path = file_path[:index]
+    file_path = os.path.realpath(sys.argv[0])
+    index = file_path.find(f'{os.sep}src{os.sep}')
+    if index == -1:
+        print('/src/ directory not found in path. Path initialization failed.')
+        return
+    project_path = file_path[:index]
     sys.path.append(os.path.join(project_path, 'src'))
     _set_sub_paths(project_path)
     print('PROJECT_PATH=' + _PathObject.project_path)
