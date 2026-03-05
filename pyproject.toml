@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "path_cfg_manager"
+version = "0.0.1"
+description = "Auto-detect project root and provide convenient path accessors for data, models, conf, and logs directories"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "zxh"}
+]
+keywords = ["path", "project", "directory", "path-management", "project-structure"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/zxh1993/path_cfg_manager"
+Repository = "https://github.com/zxh1993/path_cfg_manager.git"
+Issues = "https://github.com/zxh1993/path_cfg_manager/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
