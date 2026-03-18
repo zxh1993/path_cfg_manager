@@ -6,10 +6,13 @@ A lightweight Python package that auto-detects your project root directory and p
 
 On import, `path_cfg_manager` determines the project root by:
 
-1. Checking the `PROJECTPATH` environment variable, or
-2. Locating the `/src/` segment in the running script's path and using the parent as the project root.
+1. Checking the `ENTRY-FILEPATH` environment variable, or
+2. Locating the `/src/` segment in `sys.argv[0]` and using the parent as the project root.
 
 It then automatically adds `<project_root>/src` to `sys.path`.
+
+`ENTRY-FILEPATH` is parsed with the same logic as `sys.argv[0]`, so it should point
+to a file path under `<project_root>/src/`.
 
 ## Installation
 

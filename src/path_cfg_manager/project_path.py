@@ -2,6 +2,8 @@ import os
 import sys
 import json
 
+ENTRY_FILEPATH_ENV_VAR = 'ENTRY-FILEPATH'
+
 
 class _PathObject:
     project_path: str | None = None
@@ -20,13 +22,25 @@ def _set_sub_paths(project_path: str) -> None:
     _PathObject.logs_path = os.path.join(project_path, 'logs')
 
 
-def __init_path() -> None:
-    file_path = os.path.realpath(sys.argv[0])
+def _entry_file_path() -> str:
+    """Return the configured entry filepath, falling back to ``sys.argv[0]``."""
+    return os.getenv(ENTRY_FILEPATH_ENV_VAR) or sys.argv[0]
+
+
+def _project_path_from_entry(entry_file_path: str) -> str | None:
+    """Resolve a project root from an entry filepath using the ``/src/`` marker."""
+    file_path = os.path.realpath(entry_file_path)
     index = file_path.find(f'{os.sep}src{os.sep}')
     if index == -1:
+        return None
+    return file_path[:index]
+
+
+def __init_path() -> None:
+    project_path = _project_path_from_entry(_entry_file_path())
+    if project_path is None:
         print('/src/ directory not found in path. Path initialization failed.')
         return
-    project_path = file_path[:index]
     sys.path.append(os.path.join(project_path, 'src'))
     _set_sub_paths(project_path)
     print('PROJECT_PATH=' + _PathObject.project_path)

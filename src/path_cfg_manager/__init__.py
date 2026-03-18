@@ -1,7 +1,7 @@
 """path_cfg_manager - Project path and configuration management utility.
 
 Automatically detects the project root directory by locating the /src/ segment in
-sys.argv[0] and provides convenient helper functions for building absolute paths.
+``ENTRY-FILEPATH`` or, when that variable is unset, ``sys.argv[0]``.
 
 On import, the package appends ``<project_root>/src`` to ``sys.path``, so any
 modules under the project's ``src/`` directory become importable without manual
