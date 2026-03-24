@@ -3,6 +3,7 @@ import sys
 import json
 
 ENTRY_FILEPATH_ENV_VAR = 'ENTRY-FILEPATH'
+PATH_CONFIG_FILENAME = 'path_cfg_manager.json'
 
 
 class _PathObject:
@@ -20,6 +21,32 @@ def _set_sub_paths(project_path: str) -> None:
     _PathObject.models_path = os.path.join(project_path, 'models')
     _PathObject.conf_path = os.path.join(project_path, 'conf')
     _PathObject.logs_path = os.path.join(project_path, 'logs')
+
+
+def _apply_user_path_config() -> None:
+    """Override default subdirectory paths from ~/.config/path_cfg_manager.json when present."""
+    config_path = os.path.expanduser(os.path.join('~', '.config', PATH_CONFIG_FILENAME))
+    if not os.path.isfile(config_path):
+        return
+
+    with open(config_path, encoding='utf-8') as f:
+        path_dict = json.load(f)
+
+    data_path = path_dict.get('data_path')
+    if data_path is not None:
+        _PathObject.data_path = os.path.expanduser(data_path)
+
+    models_path = path_dict.get('models_path')
+    if models_path is not None:
+        _PathObject.models_path = os.path.expanduser(models_path)
+
+    conf_path = path_dict.get('conf_path')
+    if conf_path is not None:
+        _PathObject.conf_path = os.path.expanduser(conf_path)
+
+    logs_path = path_dict.get('logs_path')
+    if logs_path is not None:
+        _PathObject.logs_path = os.path.expanduser(logs_path)
 
 
 def _entry_file_path() -> str:
@@ -43,6 +70,7 @@ def __init_path() -> None:
         return
     sys.path.append(os.path.join(project_path, 'src'))
     _set_sub_paths(project_path)
+    _apply_user_path_config()
     print('PROJECT_PATH=' + _PathObject.project_path)
 
 

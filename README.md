@@ -14,6 +14,19 @@ It then automatically adds `<project_root>/src` to `sys.path`.
 `ENTRY-FILEPATH` is parsed with the same logic as `sys.argv[0]`, so it should point
 to a file path under `<project_root>/src/`.
 
+## Optional Path Override Config
+
+If `~/.config/path_cfg_manager.json` exists, the package reads it on import and uses any provided path overrides for `data/`, `models/`, `conf/`, and `logs/`. Omitted keys keep the default project-relative paths.
+
+```json
+{
+  "data_path": "/mnt/shared/data",
+  "models_path": "/mnt/shared/models",
+  "conf_path": "~/project-conf",
+  "logs_path": "~/project-logs"
+}
+```
+
 ## Installation
 
 ```bash
