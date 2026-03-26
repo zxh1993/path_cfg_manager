@@ -3,6 +3,7 @@ import sys
 import json
 
 ENTRY_FILEPATH_ENV_VAR = 'ENTRY_FILEPATH'
+ENTRY_FILEPATH_ENV_VAR_COMPATIBLE = 'ENTRY-FILEPATH'
 PATH_CONFIG_FILENAME = 'path_cfg_manager.json'
 
 
@@ -51,7 +52,7 @@ def _apply_user_path_config() -> None:
 
 def _entry_file_path() -> str:
     """Return the configured entry filepath, falling back to ``sys.argv[0]``."""
-    return os.getenv(ENTRY_FILEPATH_ENV_VAR) or sys.argv[0]
+    return os.getenv(ENTRY_FILEPATH_ENV_VAR) or os.getenv(ENTRY_FILEPATH_ENV_VAR_COMPATIBLE) or sys.argv[0]
 
 
 def _project_path_from_entry(entry_file_path: str) -> str | None:
