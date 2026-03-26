@@ -12,7 +12,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MODULE_PATH = PROJECT_ROOT / 'src' / 'path_cfg_manager' / 'project_path.py'
-ENTRY_FILEPATH_ENV_VAR = 'ENTRY-FILEPATH'
+ENTRY_FILEPATH_ENV_VAR = 'ENTRY_FILEPATH'
 PATH_CONFIG_FILENAME = 'path_cfg_manager.json'
 
 

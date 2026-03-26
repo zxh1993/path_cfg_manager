@@ -2,7 +2,7 @@ import os
 import sys
 import json
 
-ENTRY_FILEPATH_ENV_VAR = 'ENTRY-FILEPATH'
+ENTRY_FILEPATH_ENV_VAR = 'ENTRY_FILEPATH'
 PATH_CONFIG_FILENAME = 'path_cfg_manager.json'
 
 
